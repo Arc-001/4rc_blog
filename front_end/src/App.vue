@@ -1,15 +1,19 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <headersCustom />
+  <main>
+    <RouterView />
+  </main>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import headersCustom from './components/headersCustom.vue'
+
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    headersCustom
   }
 }
 </script>
@@ -23,4 +27,5 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
 </style>
