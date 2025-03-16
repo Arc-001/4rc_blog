@@ -4,7 +4,8 @@ import HomeCustom from './components/Home.vue'
 import BlogCustom from './components/Blog.vue'
 import ContactCustom from './components/Contact.vue'
 import { createRouter, createMemoryHistory } from 'vue-router'
-
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 const routes = [
     {path:'/', component: HomeCustom},
     {path:'/blog',component: BlogCustom},
