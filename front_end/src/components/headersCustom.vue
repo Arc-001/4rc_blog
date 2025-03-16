@@ -4,15 +4,15 @@
         <header class = "header">
             <h1>Header</h1>
             <div class="navbar">
-                <div class = "container text-left">
+                <div class = "container text-center">
                     <div class = "col">
-                        <RouterLink to="/" @keyup = "Home" class = "terminal-nav-link"> [ Home ] </RouterLink>
+                        <RouterLink to="/" @keyup = "Home" class = "terminal-nav-link"> /home </RouterLink>
                     </div>
                     <div class = "col">
-                        <RouterLink to="/blog" class = "terminal-nav-link"> [ About ] </RouterLink>
+                        <RouterLink to="/blog" class = "terminal-nav-link"> /usr/share </RouterLink>
                     </div>
                     <div class = "col">
-                        <RouterLink to="/contact" class = "terminal-nav-link"> [ Contact ] </RouterLink>
+                        <RouterLink to="/contact" class = "terminal-nav-link"> ssh contact@4rc.in </RouterLink>
                     </div>
                 </div>
             </div>
