@@ -2,8 +2,7 @@
 <template>
     <div>    
         <header class = "header">
-            <h1>Header</h1>
-            <div class="navbar">
+            <div class="navbar py-4">
                 <div class = "container text-center">
                     <div class = "col">
                         <RouterLink to="/" @keyup = "Home" class = "terminal-nav-link"> /home </RouterLink>
