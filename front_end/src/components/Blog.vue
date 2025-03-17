@@ -26,7 +26,6 @@
 <script>
 
 import MarkdownIt from 'markdown-it';
-import {bare as emoji} from 'markdown-it-emoji';
 import sub from 'markdown-it-sub';
 import sup from 'markdown-it-sup';
 import footnote from 'markdown-it-footnote';
@@ -39,6 +38,7 @@ import toc from 'markdown-it-toc-done-right';
 import tasklists from 'markdown-it-task-lists';
 import katex from 'markdown-it-katex';
 
+import 'katex/dist/katex.min.css';
 
 
 export default {
@@ -61,17 +61,12 @@ export default {
                         {
                             title: "Blog 1",
                             content: `
-                            ~ello~
-
-                            \`\`\` ~python~
-                            print("this is a test")
-                            \`\`\`
-
+                            $ sqrt() O(log_2(n)) $
                             `
                         },
                         {
                             title: "Blog 2",
-                            content: "==Blog 2==\n\n :smile: This is~the~content of blog 2"
+                            content: "==Blog 2==\n\n :smile: This is~the~content of blog 2 $\\sqrt{3x-1} + (1+x)^2$"
                         },
                         {
                             title: "Blog 3",
@@ -91,8 +86,7 @@ export default {
             linkify: true,
             typographer: true,
         })
-        this.md.use(emoji)                               // Emoji support :smile:
-    .use(sub)                                 // Subscript ~sub~
+        this.md.use(sub)                                 // Subscript ~sub~
     .use(sup)                                 // Superscript ^sup^
     .use(footnote)                            // Footnotes [^1]
     .use(deflist)                             // Definition lists
