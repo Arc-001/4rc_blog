@@ -3,6 +3,7 @@ import App from './App.vue'
 import HomeCustom from './components/Home.vue'
 import BlogCustom from './components/Blog.vue'
 import ContactCustom from './components/Contact.vue'
+import BlogView from './components/BlogView.vue'
 import { createRouter, createMemoryHistory } from 'vue-router'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
@@ -10,6 +11,10 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 const routes = [
     {path:'/', component: HomeCustom},
     {path:'/blog',component: BlogCustom},
+    {
+      path:'/blog/:uid',
+      component: BlogView
+    },
     {path:'/contact',component: ContactCustom}
   ]
   

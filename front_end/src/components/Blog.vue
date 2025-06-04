@@ -1,22 +1,11 @@
 <template>
     <div>
-    <h1>Placeholder Blog</h1>
-    <p>Lorem ipsum dolor sit amet.</p>
-    <p>Laboriosam, consequuntur nulla. Vel, voluptas.</p>
-    <p>Vitae tempora veritatis ratione! Dolor!</p>
-    <p>Alias debitis provident nam aliquam.</p>
-    <p>Sunt, minima amet? Consectetur, ipsam.</p>
-    <p>Odio ad voluptas laboriosam. Dignissimos!</p>
-    <p>Temporibus porro consectetur consequuntur ipsum!</p>
-    <p>Vel vero modi ex commodi.</p>
-    <p>Totam, quo aperiam! Unde, non?</p>
-    <p>Veniam cupiditate maiores sapiente impedit.</p>
 
     <div class="container">
         <div v-for="(blog_summary, index) in blog_list" :key="index">
             <div class="row border-success">
-                <h3>{{ blog_summary.title }}</h3>
-                <h6 v-html = "renderMD(blog_summary.content)"></h6>
+                <RouterLink :to="`/blog/${blog_summary.uid}`" class="link"><h3>{{ blog_summary.title }}</h3></RouterLink>
+                <h6 v-html = "renderMD(blog_summary.content_summary)"></h6>
             </div>
         </div>
     </div>
@@ -37,7 +26,6 @@ import anchor from 'markdown-it-anchor';
 import toc from 'markdown-it-toc-done-right';
 import tasklists from 'markdown-it-task-lists';
 import katex from 'markdown-it-katex';
-
 import 'katex/dist/katex.min.css';
 
 
@@ -47,34 +35,63 @@ export default {
         return{
             blog_list: [],
             md: null,
+            blog_url_list: []
         }
     },
     methods:{
-        async getBlog(){
-            // blog_lst = fetch("https://api.placeholder.com/bloglist")
-            // .then(response => response.json())
-            // .then(data => this.blog = data)
-            // .catch(error => console.log(error))
-            this.blog_list = await new Promise((resolve)=> {
-                setTimeout(()=>{
-                    resolve([
-                        {
-                            title: "Blog 1",
-                            content: `
-                            $ sqrt() O(log_2(n)) $
-                            `
-                        },
-                        {
-                            title: "Blog 2",
-                            content: "==Blog 2==\n\n :smile: This is~the~content of blog 2 $\\sqrt{3x-1} + (1+x)^2$"
-                        },
-                        {
-                            title: "Blog 3",
-                            content: "# Blog 3\n\nThis is the content of blog 3 Check out this website: ![test_img](https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg)"
-                        }
-                    ])
-                }, 1000)
+        // fetch json look like this:
+        // {
+        //     "blog_list": [
+                // {
+                //     "title": "Blog 1",
+                        "uid": "1",
+                //     "content_summary": "This is the content of blog 1"
+                // },
+                // {
+                //     "title": "Blog 2",
+                //      uid: "2",
+                //     "content_seuumay": "This is the content of blog 2"
+                // },
+                // {
+                //     "title": "Blog 3",
+                //      uid: "3",
+                //     "content_summary": "This is the content of blog 3"
+                // }
+        //}
+        make_blog_url_list(){
+            this.blog_list.forEach((blog) => {
+                this.blog_url_list.push({
+                    title: blog.title,
+                    url: `/blog/${blog.uid}`
+                })
             })
+        },
+        async getBlog(){
+            fetch("http://0.0.0.0:8000/api/blogs")
+                .then(response => response.json())
+                .then(data => this.blog_list = data.blog_list)
+                .catch(error => console.log(error))
+
+            // this.blog_list = await new Promise((resolve)=> {
+            //     setTimeout(()=>{
+            //         resolve([
+            //             {
+            //                 title: "Blog 1",
+            //                 content: `
+            //                 $ sqrt() O(log_2(n)) $
+            //                 `
+            //             },
+            //             {
+            //                 title: "Blog 2",
+            //                 content: "==Blog 2==\n\n :smile: This is~the~content of blog 2 $\\sqrt{3x-1} + (1+x)^2$"
+            //             },
+            //             {
+            //                 title: "Blog 3",
+            //                 content: "# Blog 3\n\nThis is the content of blog 3 Check out this website: ![test_img](https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg)"
+            //             }
+            //         ])
+            //     }, 1000)
+            // })
         },
         renderMD(content){
             return this.md?this.md.render(content):content
@@ -106,6 +123,7 @@ export default {
       level: [1, 2, 3]
     });
         this.getBlog()
+        this.make_blog_url_list()
     }
 }
 </script>
@@ -120,5 +138,15 @@ h1 {
     color: #333;
     font-size: 2em;
     margin-bottom: 0.5em;
+}
+.link{
+    color: #ff7700;
+    text-decoration: none;
+    font-weight: bold;
+}
+.link:hover {
+    color: #ff7711;
+    transform: skewX(-10deg);
+    transition: transform 0.1s ease-in-out, color 0.3s ease-in-out; /* Add transition */
 }
 </style>

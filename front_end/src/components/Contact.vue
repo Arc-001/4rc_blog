@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class = "crt-scanlines" >
         <h1>Placeholder Contact</h1>
         <p>Lorem ipsum dolor sit amet.</p>
         <p>Laboriosam, consequuntur nulla. Vel, voluptas.</p>

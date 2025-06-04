@@ -1,6 +1,6 @@
 <template>
   <headersCustom />
-  <main class = "crt-scanlines crt-flicker">
+  <main class = "crt-flicker">
     <RouterView />
   </main>
 
