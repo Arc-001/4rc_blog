@@ -63,7 +63,7 @@ db = DB_blog()
 
 @app.get("/api/blogs/") 
 async def get_blog_summaries() -> List[Blog_summary]:
-    return db.get_blog_summaries()
+    return db.get_blog_summary()
 
 @app.get("/api/blog/{uid}", response_model=blog)
 async def get_blog(uid: str) -> blog:
