@@ -44,7 +44,7 @@ export default {
         //     "blog_list": [
                 // {
                 //     "title": "Blog 1",
-                        "uid": "1",
+                        // "uid": "1",
                 //     "content_summary": "This is the content of blog 1"
                 // },
                 // {
