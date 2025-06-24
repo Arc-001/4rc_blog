@@ -1,15 +1,15 @@
 <template>
-    <div>
+
 
     <div class="container">
         <div v-for="(blog_summary, index) in blog_list" :key="index">
             <div class="row border-success">
                 <RouterLink :to="`/blog/${blog_summary.uid}`" class="link"><h3>{{ blog_summary.title }}</h3></RouterLink>
-                <h6 v-html = "renderMD(blog_summary.content_summary)"></h6>
+                <h6 v-html = "renderMD(blog_summary.content)"></h6>
             </div>
         </div>
     </div>
-    </div>
+
 </template>
 
 <script>
@@ -67,9 +67,9 @@ export default {
             })
         },
         async getBlog(){
-            fetch("http://0.0.0.0:8000/api/blogs")
+            fetch("https://api.4rc.in/api/blogs")
                 .then(response => response.json())
-                .then(data => this.blog_list = data.blog_list)
+                .then(data => this.blog_list = data)
                 .catch(error => console.log(error))
 
             // this.blog_list = await new Promise((resolve)=> {
@@ -150,3 +150,4 @@ h1 {
     transition: transform 0.1s ease-in-out, color 0.3s ease-in-out; /* Add transition */
 }
 </style>
+                                                                                           

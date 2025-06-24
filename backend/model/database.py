@@ -45,25 +45,25 @@ Blog summary response example:
 class DB_blog:
     def __init__(self):
         load_dotenv()
- 
- 
+
+
         #getting db uri 
         uri = os.getenv("MONGODB_URI")
         self.client = MongoClient(uri, server_api=ServerApi('1'))
- 
- 
+
+
         db= self.client["blog_db"]
- 
- 
+
+
         self.blog_collection = db["blog"]
         self.blog_summary_collection = db["blog_summary"]
- 
 
 
-        
+
+
         if not self.test_connection():
             raise Exception("Failed to connect to MongoDB. Please check your connection string.")
-        
+
 
     def test_connection(self) -> bool:
         try:
@@ -73,12 +73,12 @@ class DB_blog:
         except Exception as e:
             print(f"Connection error: {e}")
             return False
-        
+
     def get_blog_summary(self) -> List[Blog_summary]:
         blog_summaries = self.blog_summary_collection.find()
         return [Blog_summary(**blog) for blog in blog_summaries]
 
-    
+
     def get_blog_uid(self, uid:str):
         try:
             blog_ = self.blog_collection.find_one({"uid": uid})
@@ -103,7 +103,7 @@ class DB_blog:
         except Exception as e:
             print(f"Error deleting blog or summary: {e}")
 
-    
+
     def update_blog(self, uid: str, updated_blog: blog) -> None:
         try:
             self.blog_collection.update_one({"uid": uid}, {"$set": updated_blog.model_dump()})
@@ -133,4 +133,4 @@ dummy_summaries = [
 ]
 for b, s in zip(dummy_blogs, dummy_summaries):
     db.add_blog_and_summary(b, s)
-print("Dummy data added.")
+print("Dummy data added.")                                     
