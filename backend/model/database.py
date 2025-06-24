@@ -67,25 +67,22 @@ class DB_blog:
 
     def test_connection(self) -> bool:
         try:
-            # Send a ping to confirm a successful connection
-            self.client.admin.command('ping')
-            print("Pinged your deployment. You successfully connected to MongoDB!")
+            # Attempt to retrieve server information to test the connection
+            self.client.server_info()
             return True
-        
-        
         except Exception as e:
-            print(e)
+            print(f"Connection error: {e}")
             return False
-
+        
     def get_blog_summary(self) -> List[Blog_summary]:
         blog_summaries = self.blog_summary_collection.find()
         return [Blog_summary(**blog) for blog in blog_summaries]
 
     
-    def get_blog_uid(self, uid:str) -> blog:
+    def get_blog_uid(self, uid:str):
         try:
             blog_ = self.blog_collection.find_one({"uid": uid})
-            return blog(**blog_) if blog_ else None
+            return blog_
         except Exception as e:
             print(e)
             return None
@@ -123,21 +120,17 @@ class DB_blog:
 
 
 
-if __name__ == "__main__":
-    db = DB_blog()
-    #check for the presence of dummy blog
-    if not db.get_blog_summary() and not db.get_blog_uid("1"):
-        print("No blog summaries found. Adding dummy data...")
-        dummy_blogs = [
-            blog(title="Hello world", uid="1", content="==Blog 1==This is the content of blog 1 with math $\\sqrt{n}$ and ==highlight==."),
-            blog(title="Blog 2", uid="2", content="==Blog 2==\n\n:smile: This is~the~content of blog 2 $\\sqrt{3x-1} + (1+x)^2$"),
-            blog(title="Blog 3", uid="3", content="==Blog 3==\n\n![test_img](https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg)")
-        ]
-        dummy_summaries = [
-            Blog_summary(title=b.title, uid=b.uid, content=b.content) for b in dummy_blogs
-        ]
-        for b, s in zip(dummy_blogs, dummy_summaries):
-            db.add_blog_and_summary(b, s)
-        print("Dummy data added.")
-    else:
-        print("Blog summaries found.")
+db = DB_blog()
+#check for the presence of dummy blog
+print("No blog summaries found. Adding dummy data...")
+dummy_blogs = [
+    blog(title="Hello world", uid="1", content="==Blog 1==This is the content of blog 1 with math $\\sqrt{n}$ and ==highlight==."),
+    blog(title="Blog 2", uid="2", content="==Blog 2==\n\n:smile: This is~the~content of blog 2 $\\sqrt{3x-1} + (1+x)^2$"),
+    blog(title="Blog 3", uid="3", content="==Blog 3==\n\n![test_img](https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg)")
+]
+dummy_summaries = [
+    Blog_summary(title=b.title, uid=b.uid, content=b.content) for b in dummy_blogs
+]
+for b, s in zip(dummy_blogs, dummy_summaries):
+    db.add_blog_and_summary(b, s)
+print("Dummy data added.")
