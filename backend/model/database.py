@@ -2,11 +2,9 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from dotenv import load_dotenv
 import os
-import io
-from PIL import Image
-import datetime
+# import datetime
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import List
 
 #defining the data model for blog summaries
 class Blog_summary(BaseModel):
