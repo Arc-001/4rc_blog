@@ -47,7 +47,7 @@ export default {
                 "content": "Blog content in markdown format"
             }
             */
-            fetch("http://0.0.0.0:8000/api/blog/"+uid)
+            fetch("https://api.4rc.in/api/blog/"+uid)
             .then(response => response.json())
             .then(data => {
                 this.title = data.title;
@@ -77,4 +77,3 @@ export default {
 }
 
 </script>
-

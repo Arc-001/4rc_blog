@@ -1,5 +1,23 @@
 <template>
     <div>
+    <img ref="gifImage" src="@/assets/2.gif" alt="into" style="width: 450px;height: 20px; background-blend-mode: darken;" @load="pauseGif">
+
+</template>
+
+<script>
+export default {
+    name: 'HomeCustom',
+    methods: {
+        pauseGif() {
+            const img = this.$refs.gifImage;
+            if (img) {
+                const gifSrc = img.src;
+                img.src = gifSrc;
+            }
+        }
+    }
+}
+</script>
     <h1>Placeholder Home</h1>
     <p>Lorem ipsum dolor sit amet.</p>
     <p>Laboriosam, consequuntur nulla. Vel, voluptas.</p>

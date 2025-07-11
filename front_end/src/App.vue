@@ -3,8 +3,6 @@
   <main class = "crt-flicker">
     <RouterView />
   </main>
-
-  <p class = "crt-flicker"> This is a test </p>
 </template>
 
 <script>
@@ -40,7 +38,7 @@ export default {
 <style>
 #app {
   font-family: monospace;
-  background-color: black;
+  /* background-color: black; */
   color: green;
   padding: 10px;
   border: 1px solid #000;
@@ -50,16 +48,17 @@ export default {
 html, body {
   margin: 0;
   padding: 0;
-  background-color: #1a1a1a; /* Dark background for the whole page */
-  height: 100%;
-  width: 100%;
-  overflow-x: hidden; /* Prevent horizontal scrolling outside app */
+  background-image: url(@/assets/1.gif);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  /* overflow-x: hidden; Prevent horizontal scrolling outside app */
 }
 
 /* Apply dark background to all elements by default */
-* {
+/* * {
   box-sizing: border-box;
-}
+} */
 
 body {
   display: flex;
@@ -74,7 +73,7 @@ body {
 .crt-flicker {
   font-family: monospace; /* Or any retro font */
   color: #0f0; /* Green text */
-  background-color: black;
+  /* background-color: black; */
   text-shadow: 0 0 5px #00ff00; /* Glow effect */
   animation: crt-flicker 0.1s infinite steps(2); /* Flicker animation */
 }
@@ -125,5 +124,6 @@ body {
     transform: perspective(300px) rotateY(2deg) scale(1.01);
   }
 }
+
 
 </style>
